@@ -1,5 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { AuthUser } from "../context/authContext";
+import NavBar from "./NavBar";
 
 // eslint-disable-next-line react/prop-types
 const ProtectedRoute = ({ children }) => {
@@ -9,7 +10,12 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/login" />;
   }
 
-  return children;
+  return (
+    <>
+      <NavBar />
+      {children}
+    </>
+  );
 };
 
 export default ProtectedRoute;
