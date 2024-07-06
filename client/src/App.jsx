@@ -1,12 +1,17 @@
-
+import Routers from "./navigators/router";
+import AuthProvider from "./context/authContext";
+import { QueryClient, QueryClientProvider } from "react-query";
 function App() {
+  const queryClient = new QueryClient();
   return (
     <>
-      <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <Routers />
+        </AuthProvider>
+      </QueryClientProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

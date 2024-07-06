@@ -1,5 +1,5 @@
 const Project = require("../models/Project");
-const cloudinary = require("../config/cloudinary");
+// const cloudinary = require("../config/cloudinary");
 const addProject = async (req, res) => {
   try {
     const { userId, projectName, allImages } = req.body;
