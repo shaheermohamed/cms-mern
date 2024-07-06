@@ -53,19 +53,15 @@ export const authorization = async ({ token }) => {
   }
 };
 
-export const addProject = async ({
-  userId,
-  token,
-  data,
-  selectedImagesUrl,
-}) => {
+export const addCustomer = async ({ token, name, email, address, age }) => {
   try {
     const response = await axios.post(
-      `${url}/project/add`,
+      `${url}/customer/addCustomer`,
       {
-        userId: userId,
-        projectName: data.name,
-        allImages: selectedImagesUrl,
+        name: name,
+        email: email,
+        address: address,
+        age: age,
       },
       {
         headers: {
@@ -82,13 +78,13 @@ export const addProject = async ({
   }
 };
 
-export const addImages = async ({ token, id, selectedImagesUrl }) => {
+export const updateOneCustomer = async ({ token, id, data }) => {
   try {
     const response = await axios.post(
-      `${url}/project/addImages`,
+      `${url}/customer/updateOneCustomer`,
       {
         id: id,
-        allImages: selectedImagesUrl,
+        data: data,
       },
       {
         headers: {
@@ -105,9 +101,9 @@ export const addImages = async ({ token, id, selectedImagesUrl }) => {
   }
 };
 
-export const getProjects = async ({ token, userId }) => {
+export const getCustomers = async ({ token }) => {
   try {
-    const response = await axios.get(`${url}/project/fetch/${userId}`, {
+    const response = await axios.get(`${url}/customer/fetchCustomers`, {
       headers: {
         Authorization: `${token}`,
       },
@@ -121,10 +117,9 @@ export const getProjects = async ({ token, userId }) => {
   }
 };
 
-export const getProject = async ({ token, id }) => {
-  console.log("called ir");
+export const getOneCustomer = async ({ token, id }) => {
   try {
-    const response = await axios.get(`${url}/project/fetchOne/${id}`, {
+    const response = await axios.get(`${url}/customer/fetchOneCustomer/${id}`, {
       headers: {
         Authorization: `${token}`,
       },
@@ -139,9 +134,17 @@ export const getProject = async ({ token, id }) => {
   }
 };
 
-export const getViewProject = async ({ id }) => {
+export const deleteOneCustomer = async ({ token, id }) => {
   try {
-    const response = await axios.get(`${url}/project/view/${id}`);
+    const response = await axios.delete(
+      `${url}/customer/deleteOneCustomer/${id}`,
+      {
+        headers: {
+          Authorization: `${token}`,
+        },
+      }
+    );
+
     return response.data;
   } catch (error) {
     console.error(

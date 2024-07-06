@@ -1,21 +1,16 @@
 import { useQuery } from "react-query";
-import { getProject, getProjects, getViewProject } from "../api/apiCalls";
+import { getCustomers, getOneCustomer } from "../api/apiCalls";
 const token = localStorage.getItem("token");
-export const useProjects = ({ userId }) => {
-  const result = useQuery(["projects", token, userId], () =>
-    getProjects({ token, userId })
-  );
+export const useCustomers = () => {
+  const result = useQuery(["customers", token], () => getCustomers({ token }));
   return result;
 };
 
-export const useProject = ({ id }) => {
+export const useOneCustomer = ({ id }) => {
   console.log("query called");
-  const result = useQuery(["project", id], () => getProject({ token, id }));
+  const result = useQuery(["customer", id], () =>
+    getOneCustomer({ token, id })
+  );
   console.log("result:", result);
-  return result;
-};
-
-export const useViewProject = ({ id }) => {
-  const result = useQuery(["project", id], () => getViewProject({ id }));
   return result;
 };

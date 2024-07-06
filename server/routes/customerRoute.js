@@ -6,6 +6,7 @@ const {
   fetchCustomers,
   fetchOneCustomer,
   updateOneCustomer,
+  deleteOneCustomer,
 } = require("../controllers/customerController");
 
 //to add customer
@@ -19,5 +20,8 @@ router.get("/fetchOneCustomer/:id", verifyToken, fetchOneCustomer);
 
 //update one customer
 router.post("/updateOneCustomer", verifyToken, updateOneCustomer);
+
+//to delete one customer
+router.delete("/deleteOneCustomer/:id", verifyToken, deleteOneCustomer);
 
 module.exports = router;

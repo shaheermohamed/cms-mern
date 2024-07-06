@@ -62,9 +62,28 @@ const updateOneCustomer = async (req, res) => {
   }
 };
 
+const deleteOneCustomer = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteResult = await Customer.deleteOne({ _id: id });
+    if (deleteResult.deletedCount === 0) {
+      return res.status(404).json({
+        message: "Customer not found or no images added",
+      });
+    }
+
+    res
+      .status(201)
+      .json({ message: "Customer deleted successfully", deleteResult });
+  } catch (error) {
+    res.status(500).json({ error: "Customer deletion failed", error });
+  }
+};
+
 module.exports = {
   addCustomer,
   fetchCustomers,
   fetchOneCustomer,
   updateOneCustomer,
+  deleteOneCustomer
 };
