@@ -82,7 +82,7 @@ export const addCustomer = async ({ token, name, email, address, age }) => {
 // this api for update user
 export const updateOneCustomer = async ({ token, id, data }) => {
   try {
-    const response = await axios.post(
+    const response = await axios.put(
       `${url}/customer/updateOneCustomer`,
       {
         id: id,

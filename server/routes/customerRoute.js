@@ -19,7 +19,7 @@ router.get("/fetchCustomers", verifyToken, fetchCustomers);
 router.get("/fetchOneCustomer/:id", verifyToken, fetchOneCustomer);
 
 //update one customer
-router.post("/updateOneCustomer", verifyToken, updateOneCustomer);
+router.put("/updateOneCustomer", verifyToken, updateOneCustomer);
 
 //to delete one customer
 router.delete("/deleteOneCustomer/:id", verifyToken, deleteOneCustomer);
