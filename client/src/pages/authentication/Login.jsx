@@ -5,7 +5,7 @@ import { login } from "../../services/api/apiCalls";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { AuthUser } from "../../context/authContext";
-
+import { useState } from "react";
 
 //Validation Schema
 const schema = yup.object().shape({
@@ -23,6 +23,7 @@ const Login = () => {
   const { setUser } = AuthUser();
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -32,9 +33,9 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
-
   //this function for login user
   const onSubmit = async (data) => {
+    setIsLoading(true);
     try {
       const response = await login({
         email: data.email,
@@ -60,6 +61,8 @@ const Login = () => {
         duration: 3,
       });
       console.error("Login error:", error.response.data);
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -134,10 +137,11 @@ const Login = () => {
 
             <div>
               <button
+                disabled={isLoading}
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign In
+                {isLoading ? "  Loading..." : "  Sign In"}
               </button>
             </div>
           </form>

@@ -4,6 +4,7 @@ import * as yup from "yup";
 import { registerUser } from "../../services/api/apiCalls";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 //Validation Schema
 const schema = yup.object().shape({
@@ -20,6 +21,7 @@ const schema = yup.object().shape({
 const Register = () => {
   const navigate = useNavigate();
   const [messageApi, contextHolder] = message.useMessage();
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -28,9 +30,9 @@ const Register = () => {
     resolver: yupResolver(schema),
   });
 
-
   //This function for register user for accessing cms
   const onSubmit = async (data) => {
+    setIsLoading(true);
     try {
       const response = await registerUser({
         email: data.email,
@@ -50,6 +52,8 @@ const Register = () => {
         duration: 3,
       });
       console.error("Register error:", error.response.data);
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -124,10 +128,11 @@ const Register = () => {
 
             <div>
               <button
+                disabled={isLoading}
                 type="submit"
                 className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Sign up
+                {isLoading ? "Loading..." : "Sign up"}
               </button>
             </div>
           </form>
