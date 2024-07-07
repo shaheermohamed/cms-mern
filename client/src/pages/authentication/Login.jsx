@@ -46,7 +46,7 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(response.user));
       window.location.reload();
       setTimeout(() => {
-        navigate("/dashboard");
+        navigate("/");
       }, 2000);
     } catch (error) {
       messageApi.open({

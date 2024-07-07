@@ -8,7 +8,6 @@ import ProtectedRoute from "../components/ProtectedRoute";
 const router = () => {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" />} />
       <Route
         path="/login"
         element={
@@ -26,7 +25,7 @@ const router = () => {
         }
       />
       <Route
-        path="/dashboard"
+        path="/"
         element={
           <ProtectedRoute>
             <Dashboard />
