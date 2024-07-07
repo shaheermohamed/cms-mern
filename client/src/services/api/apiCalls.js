@@ -1,9 +1,4 @@
 import axios from "axios";
-// import dotenv from "dotenv";
-
-// dotenv.config();
-
-// const url = import.meta.env.DEV_SERVER;
 const url = "http://localhost:5000";
 
 export const registerUser = async ({ email, password }) => {

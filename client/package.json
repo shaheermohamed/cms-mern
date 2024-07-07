@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev-ip": "vite --host",
+    "live": "vite --mode live",
     "build": "vite build",
+    "build-live": "vite build --mode live ",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
