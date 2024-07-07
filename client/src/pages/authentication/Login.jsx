@@ -44,10 +44,10 @@ const Login = () => {
       setUser({ loggedIn: true });
       localStorage.setItem("token", response.token);
       localStorage.setItem("user", JSON.stringify(response.user));
-      window.location.reload();
       setTimeout(() => {
         navigate("/");
       }, 2000);
+      // window.location.reload();
     } catch (error) {
       messageApi.open({
         type: "error",
