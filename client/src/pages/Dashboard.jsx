@@ -1,4 +1,4 @@
-import { Button, Modal, Space, Spin, Table } from "antd";
+import { Button, Modal, Space, Spin, Table, message } from "antd";
 import { useCustomers } from "../services/query/queryCalls";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -10,6 +10,7 @@ import {
   deleteOneCustomer,
 } from "../services/api/apiCalls";
 
+//Validation schema
 const schema = yup.object().shape({
   name: yup.string().required("Name is required"),
   age: yup.number().required("Age is required"),
@@ -21,6 +22,7 @@ const schema = yup.object().shape({
 });
 const Dashboard = () => {
   const token = localStorage.getItem("token");
+  const [messageApi, contextHolder] = message.useMessage();
   const {
     data: customerData,
     isLoading,
@@ -40,6 +42,7 @@ const Dashboard = () => {
     resolver: yupResolver(schema),
   });
 
+  /*here i used ant design table for ui*/
   const columns = [
     {
       title: "Name",
@@ -109,6 +112,7 @@ const Dashboard = () => {
     setUpdateId(null);
   };
 
+  //this function for create and update of customer data
   const onSubmit = async (data) => {
     if (isEdit) {
       try {
@@ -122,8 +126,18 @@ const Dashboard = () => {
         setEdit(false);
         reset();
         setUpdateId(null);
+        messageApi.open({
+          type: "success",
+          content: "Updated successfully",
+          duration: 3,
+        });
       } catch (error) {
         console.error(error);
+        messageApi.open({
+          type: "error",
+          content: error.response.data.error,
+          duration: 3,
+        });
       } finally {
         setIsModalOpen(false);
       }
@@ -139,26 +153,42 @@ const Dashboard = () => {
         console.log(response);
         refetch();
         reset();
+        messageApi.open({
+          type: "success",
+          content: "Added successfully",
+          duration: 3,
+        });
       } catch (error) {
         console.error(error);
+        messageApi.open({
+          type: "error",
+          content: error.response.data.error,
+          duration: 3,
+        });
       } finally {
         setIsModalOpen(false);
       }
     }
   };
+  //this function is delete customer data
   function deleteCustomer() {
     deleteOneCustomer({
       token,
       id: deleteId,
     });
     refetch();
+    messageApi.open({
+      type: "success",
+      content: "Deleted successfully",
+      duration: 3,
+    });
   }
 
   return (
     <>
-      {/* <NavBar /> */}
+      {contextHolder}
       <Modal
-        title="Basic Modal"
+        title="Delete!"
         open={isDeleteModalOpen}
         onOk={() => {
           deleteCustomer();

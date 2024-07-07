@@ -2,6 +2,7 @@ import axios from "axios";
 // const url = "http://localhost:5000";
 const url = "https://cms-mern-server.onrender.com"
 
+//this api for register user
 export const registerUser = async ({ email, password }) => {
   try {
     const response = await axios.post(`${url}/auth/register`, {
@@ -18,6 +19,7 @@ export const registerUser = async ({ email, password }) => {
   }
 };
 
+//this api for login user
 export const login = async ({ email, password }) => {
   console.log("url:", url);
   try {
@@ -32,6 +34,7 @@ export const login = async ({ email, password }) => {
   }
 };
 
+//this api for authorization of user
 export const authorization = async ({ token }) => {
   try {
     const response = await axios.get(`${url}/protected`, {
@@ -49,6 +52,8 @@ export const authorization = async ({ token }) => {
   }
 };
 
+
+// this api for adding customer
 export const addCustomer = async ({ token, name, email, address, age }) => {
   try {
     const response = await axios.post(
@@ -74,6 +79,7 @@ export const addCustomer = async ({ token, name, email, address, age }) => {
   }
 };
 
+// this api for update user
 export const updateOneCustomer = async ({ token, id, data }) => {
   try {
     const response = await axios.post(
@@ -97,6 +103,7 @@ export const updateOneCustomer = async ({ token, id, data }) => {
   }
 };
 
+//this api for fetching all customers
 export const getCustomers = async ({ token }) => {
   try {
     const response = await axios.get(`${url}/customer/fetchCustomers`, {
@@ -112,6 +119,8 @@ export const getCustomers = async ({ token }) => {
     );
   }
 };
+
+//this api for fetching one customer
 
 export const getOneCustomer = async ({ token, id }) => {
   try {
@@ -130,6 +139,7 @@ export const getOneCustomer = async ({ token, id }) => {
   }
 };
 
+// this api for delete one customer
 export const deleteOneCustomer = async ({ token, id }) => {
   try {
     const response = await axios.delete(

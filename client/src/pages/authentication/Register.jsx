@@ -4,6 +4,8 @@ import * as yup from "yup";
 import { registerUser } from "../../services/api/apiCalls";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
+
+//Validation Schema
 const schema = yup.object().shape({
   email: yup
     .string()
@@ -26,6 +28,8 @@ const Register = () => {
     resolver: yupResolver(schema),
   });
 
+
+  //This function for register user for accessing cms
   const onSubmit = async (data) => {
     try {
       const response = await registerUser({

@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+
+//this for setting up mongodb database
 function connectDB() {
   const url = process.env.MONGO_URI;
 

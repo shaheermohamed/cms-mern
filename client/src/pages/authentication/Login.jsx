@@ -5,6 +5,9 @@ import { login } from "../../services/api/apiCalls";
 import { message } from "antd";
 import { useNavigate } from "react-router-dom";
 import { AuthUser } from "../../context/authContext";
+
+
+//Validation Schema
 const schema = yup.object().shape({
   email: yup
     .string()
@@ -29,6 +32,8 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
+
+  //this function for login user
   const onSubmit = async (data) => {
     try {
       const response = await login({
