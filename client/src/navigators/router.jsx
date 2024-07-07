@@ -9,6 +9,14 @@ const router = () => {
   return (
     <Routes>
       <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
         path="/login"
         element={
           <RedirectIfAuthenticated>
@@ -22,14 +30,6 @@ const router = () => {
           <RedirectIfAuthenticated>
             <Register />
           </RedirectIfAuthenticated>
-        }
-      />
-      <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
         }
       />
     </Routes>
