@@ -1,4 +1,8 @@
 const jwt = require("jsonwebtoken");
+
+/**
+ * Verifies the token in the request header and sets the user ID in the request object.
+ */
 function verifyToken(req, res, next) {
   const token = req.header("Authorization");
   //   console.log("token,", token);

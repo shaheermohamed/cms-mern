@@ -1,4 +1,8 @@
 const Customer = require("../models/Customer");
+/**
+ * Async function to add a new customer to the database.
+ *
+ */
 const addCustomer = async (req, res) => {
   try {
     const { name, email, address, age } = req.body;
@@ -9,7 +13,10 @@ const addCustomer = async (req, res) => {
     res.status(500).json({ error: "Customer addition failed" });
   }
 };
-
+/**
+ * Fetches all customers from the database and sends a JSON response with the customers.
+ *
+ */
 const fetchCustomers = async (req, res) => {
   try {
     const customers = await Customer.find({});
@@ -18,7 +25,10 @@ const fetchCustomers = async (req, res) => {
     res.status(500).json({ error: "Fetching customers failed" });
   }
 };
-
+/**
+ * Fetches a single customer from the database based on the provided ID.
+ *
+ */
 const fetchOneCustomer = async (req, res) => {
   try {
     const { id } = req.params;
@@ -30,7 +40,10 @@ const fetchOneCustomer = async (req, res) => {
     res.status(500).json({ error: "Fetching customer" });
   }
 };
-
+/**
+ * Updates a customer in the database with the provided data.
+ *
+ */
 const updateOneCustomer = async (req, res) => {
   try {
     const { id, data } = req.body;
@@ -61,7 +74,10 @@ const updateOneCustomer = async (req, res) => {
     res.status(500).json({ error: "Customer addition failed", error });
   }
 };
-
+/**
+ * Deletes a customer based on the provided ID from the request parameters.
+ *
+ */
 const deleteOneCustomer = async (req, res) => {
   try {
     const { id } = req.params;

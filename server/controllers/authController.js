@@ -1,6 +1,10 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+
+/**
+ * Registers a new user.
+ */
 const register = async (req, res) => {
   try {
     const {email, password } = req.body;
@@ -12,6 +16,10 @@ const register = async (req, res) => {
     res.status(500).json({ error: "Registration failed" });
   }
 };
+
+/**
+ * Handles user login by verifying credentials, generating a token upon successful login, and returning appropriate responses.
+ */
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
